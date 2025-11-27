@@ -1,6 +1,4 @@
-// ============================================
 // FILE 1: ai-editor/src/editor/createEditor.ts
-// ============================================
 
 import { EditorState, Plugin, TextSelection } from "prosemirror-state";
 import { EditorView, Decoration, DecorationSet } from "prosemirror-view";

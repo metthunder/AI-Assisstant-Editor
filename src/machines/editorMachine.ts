@@ -12,18 +12,6 @@ interface EditorContext {
   isTyping: boolean;
 }
 
-type EditorEvent =
-  | { type: "UPDATE"; text: string }
-  | { type: "UPDATE_STATS"; wordCount: number; charCount: number }
-  | { type: "CONTINUE" }
-  | { type: "UNDO" }
-  | { type: "CLEAR" }
-  | { type: "RETRY" }
-  | { type: "SAVE_HISTORY" }
-  | { type: "TYPE_NEXT_CHAR" }
-  | { type: "TYPING_COMPLETE" }
-  | { type: "STOP_TYPING" };
-
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 export const editorMachine = createMachine(
