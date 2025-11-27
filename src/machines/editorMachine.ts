@@ -1,4 +1,6 @@
-// ai-editor/src/machines/editorMachine.ts
+// ============================================
+// FILE 2: ai-editor/src/machines/editorMachine.ts
+// ============================================
 
 import { createMachine, assign } from "xstate";
 
@@ -12,10 +14,12 @@ interface EditorContext {
 
 type EditorEvent =
   | { type: "UPDATE"; text: string }
+  | { type: "UPDATE_STATS"; wordCount: number; charCount: number }
   | { type: "CONTINUE" }
   | { type: "UNDO" }
   | { type: "CLEAR" }
-  | { type: "RETRY" };
+  | { type: "RETRY" }
+  | { type: "SAVE_HISTORY" };
 
 export const editorMachine = createMachine(
   {
@@ -34,6 +38,9 @@ export const editorMachine = createMachine(
           UPDATE: {
             actions: "updateText",
           },
+          UPDATE_STATS: {
+            actions: "updateStats",
+          },
           CONTINUE: {
             target: "loading",
             cond: "hasText",
@@ -44,6 +51,9 @@ export const editorMachine = createMachine(
           },
           CLEAR: {
             actions: "clearText",
+          },
+          SAVE_HISTORY: {
+            actions: "saveToHistory",
           },
         },
       },
@@ -69,6 +79,9 @@ export const editorMachine = createMachine(
             target: "idle",
             actions: "updateText",
           },
+          UPDATE_STATS: {
+            actions: "updateStats",
+          },
           CLEAR: {
             target: "idle",
             actions: "clearText",
@@ -83,11 +96,13 @@ export const editorMachine = createMachine(
         const text = evt.text || "";
         return {
           text,
-          wordCount: text.trim() ? text.trim().split(/\s+/).length : 0,
-          charCount: text.length,
           error: null,
         };
       }),
+      updateStats: assign((ctx: EditorContext, evt: any) => ({
+        wordCount: evt.wordCount || 0,
+        charCount: evt.charCount || 0,
+      })),
       saveToHistory: assign((ctx: EditorContext) => ({
         history: [...ctx.history.slice(-9), ctx.text],
       })),
