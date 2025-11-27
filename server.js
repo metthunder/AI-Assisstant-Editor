@@ -1,20 +1,18 @@
 // server.js
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
-require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Initialize Gemini API
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// Continue writing endpoint
 app.post('/api/continue-writing', async (req, res) => {
   try {
     const { text } = req.body;
@@ -44,7 +42,6 @@ Continuation (only new text):`;
     const response = await result.response;
     let continuation = response.text().trim();
 
-    // ROBUST REPETITION REMOVAL LOGIC
     // Strategy 1: Check if continuation starts with the full original text
     const textLower = text.toLowerCase().trim();
     const continuationLower = continuation.toLowerCase();
