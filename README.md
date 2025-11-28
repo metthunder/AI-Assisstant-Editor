@@ -33,7 +33,7 @@ root/
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-public-github-link>
+git clone https://github.com/metthunder/AI-Assisstant-Editor
 cd ai-editor
 ```
 ### 2. Install Required Dependencies 
