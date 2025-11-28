@@ -1,46 +1,75 @@
-# Getting Started with Create React App
+# 📝 AI-Assisted Text Editor (React + TypeScript + XState + ProseMirror)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project implements an AI-powered text editor as described in the assignment.  
+The user can type in a ProseMirror editor and click **Continue Writing** to generate AI-powered text using the Gemini API.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+- Built using **React + TypeScript**
+- Uses **XState** for editor state management
+- Rich-text editor implemented using **ProseMirror**
+- Backend powered by **Node.js + Express**
+- AI continuation powered by **Gemini API**
+- Clean architecture & easily extendable
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 📁 Project Structure
 
-### `npm test`
+```bash
+root/
+├── src/              # React + TS + ProseMirror + XState
+├── src/server.js     # Node.js Express Server using Gemini API
+├── requirements.txt
+└── README.md
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 📦 Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. Clone the Repository
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone <your-public-github-link>
+cd ai-editor
+```
+### 2. Install Required Dependencies 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm install $(cat requirements.txt | tr '\n' ' ')
+```
 
-### `npm run eject`
+## 🔐 Environment Setup
+Create .env file inside the src/ folder
+(where server.js exists)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+GEMINI_API_KEY=your_api_key_here
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Make sure:
+.env is inside src/
+Same directory as server.js
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## ▶️ Running the Backend (server.js)
+The backend server is inside the src folder.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Start it using:
 
-## Learn More
+```bash
+node src/server.js
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The backend will run on:
+http://localhost:3001
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## ▶️ Running the Frontend
+Since frontend code (App.tsx, components, machines, editor, etc.) also lives inside src/, simply run:
+
+```bash
+npm start
+```
+
+Frontend will run on:
+http://localhost:3000
